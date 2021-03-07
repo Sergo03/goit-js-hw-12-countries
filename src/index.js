@@ -1,32 +1,25 @@
 import './styles.css'
-import countryCard from './templates/country-card.hbs'
+import fetchCountries from './js/fetchCountries'
+import renderCountry from './js/renderCountry'
+
 var debounce = require('lodash.debounce');
+import '@pnotify/core/dist/BrightTheme.css';
+import '@pnotify/core/dist/Material.css';
+import '../node_modules/@pnotify/core/dist/PNotify.css'
+import '../node_modules/@pnotify/desktop/dist/PNotifyDesktop.css'
+const { defaults } = require('@pnotify/core');
 
 const searchRef = document.querySelector('#js-search');
-const containerRef = document.querySelector('.country-container')
-
 searchRef.addEventListener('input', debounce(onSearch,500));
 
 
 function onSearch(event) {
-    
     const value = event.target.value;
     
-    searchCountry(value)
+    fetchCountries(value)
         .then(renderCountry)
         .catch(error => console.log(error));
-   
-}
+};
 
-function searchCountry(name) {
-   return fetch(`https://restcountries.eu/rest/v2/name/${name}`)
-    .then(response => {
-        return response.json();
-    }
-    )
-}
 
-function renderCountry(country) {
-    const markup = countryCard(country);
-        containerRef.insertAdjacentHTML('beforeend', markup)
-}
+
