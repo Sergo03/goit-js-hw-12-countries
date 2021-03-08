@@ -7,13 +7,14 @@ export default function renderCountry(country) {
     
     if (country.length < 2) {
         
-        
+        containerRef.innerHTML = '';
         const markup = countryCard(country);
         containerRef.insertAdjacentHTML('beforeend', markup)
         
     }
     if(country.length>10) {
-       return error({
+        return  error({
+          
        text: "Too many matches found. Please enter a more specific query!"
     });
     } if (country.length > 2) {
@@ -24,6 +25,8 @@ export default function renderCountry(country) {
 }
 
 function renderListCountry(list) {
+    containerRef.innerHTML = '';
         const markupList = countryList(list);
-        containerRef.insertAdjacentHTML('beforeend',markupList)
+    containerRef.insertAdjacentHTML('beforeend', markupList)
+    
     };

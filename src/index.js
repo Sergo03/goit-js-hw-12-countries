@@ -8,7 +8,7 @@ import '@pnotify/core/dist/Material.css';
 import '../node_modules/@pnotify/core/dist/PNotify.css'
 import '../node_modules/@pnotify/desktop/dist/PNotifyDesktop.css'
 const { defaults } = require('@pnotify/core');
-
+const { alert, notice, info, success, error } = require('@pnotify/core');
 const searchRef = document.querySelector('#js-search');
 searchRef.addEventListener('input', debounce(onSearch,500));
 
@@ -18,7 +18,14 @@ function onSearch(event) {
     
     fetchCountries(value)
         .then(renderCountry)
-        .catch(error => console.log(error));
+        .catch(e => {
+            notice({
+            text: "Please!Write the name of the country! "
+         })
+        })
+        .finally(() => {
+           
+        })
 };
 
 
